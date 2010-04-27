@@ -18,6 +18,7 @@ var BrandBox = new Class({
     timer:     null,
 
     initialize: function(container, options) {
+        this.setOptions(options);
         this.container = document.id(container);
         this.items     = this.container.getElements(this.options.items);
         var headers    = this.items.getElement(this.options.headers);
@@ -31,38 +32,40 @@ var BrandBox = new Class({
                 tab.addEvent('click', function() {
                     self.show(index);
                 });
-                this.tabs.push(tab);
+                self.tabs.push(tab);
             });
             this.options.tabs = document.id(this.options.tabs);
 
             this.options.tabs.empty();
-            this.options.adopt(this.tabs);
+            this.options.tabs.adopt(this.tabs);
         }
 
         if (this.options.list) {
             this.list = new Elements();
             headers.each(function(header, index) {
-                var item = new Element('li', {'class': 'item', 'text': header});
+                var item = new Element('li', {'class': 'item'}).adopt(header.clone());
                 item.addEvent('click', function() {
                     self.show(index);
                 });
-                this.list.push(item);
+                self.list.push(item);
             });
             this.options.list = document.id(this.options.list);
 
             this.options.list.empty();
-            this.options.adopt(this.list);
+            this.options.list.adopt(this.list);
         }
         
-        if (items.length > 0) {
+        if (this.items.length > 0) {
+            this.items.setStyle('visibility', 'hidden');
+            this.current = 0;
             this.show(0);
 
-            this.timer = this.next.periodical(this.options.interval);
+            this.timer = this.next.bind(this).periodical(this.options.interval);
         }
     },
 
     start: function() {
-        this.timer = this.next.periodical(this.options.interval);
+        this.timer = this.next.bind(this).periodical(this.options.interval);
         this.fireEvent('start', this.current);
     },
 
@@ -76,7 +79,7 @@ var BrandBox = new Class({
     },
 
     show: function(index) {
-        if (index > 0 && index < this.items.length) {
+        if (index >= 0 && index < this.items.length) {
             this.items[this.current].fade('out');
             this.items[index].fade('in');
             
