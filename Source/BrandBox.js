@@ -14,7 +14,7 @@ var BrandBox = new Class({
     items:     [],
     tabs:      null,
     list:      null,
-    current:   -1,
+    current:   0,
     timer:     null,
 
     initialize: function(container, options) {
@@ -56,12 +56,16 @@ var BrandBox = new Class({
         }
         
         if (this.items.length > 0) {
-            this.items.setStyle('visibility', 'hidden');
-            this.current = 0;
-            this.show(0);
+            this.items.setStyles({
+                visibility: 'hidden',
+                opacity: 0
+            });
+            this.show(this.current, false);
 
             this.timer = this.next.bind(this).periodical(this.options.interval);
         }
+
+        this.container.store('brandbox', this);
     },
 
     start: function() {
@@ -78,10 +82,21 @@ var BrandBox = new Class({
         this.show((this.current + 1) % this.items.length);
     },
 
-    show: function(index) {
+    show: function(index, animate) {
         if (index >= 0 && index < this.items.length) {
-            this.items[this.current].fade('out');
-            this.items[index].fade('in');
+            if (animate == undefined || animate) {
+                this.items[this.current].fade('out');
+                this.items[index].fade('in');
+            } else {
+                this.items[this.current].setStyles({
+                    visibility: 'hidden',
+                    opacity: 0
+                });
+                this.items[index].setStyles({
+                    visibility: 'visible',
+                    opacity: 1
+                });
+            }
             
             if (this.options.tabs) {
                 this.tabs[this.current].removeClass('active');
