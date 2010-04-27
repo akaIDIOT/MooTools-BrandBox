@@ -28,7 +28,7 @@ var BrandBox = new Class({
         if (this.options.tabs) {
             this.tabs = new Elements();
             headers.each(function(header, index) {
-                var tab = new Element('li', {'class': 'tab', 'text': index + 1});
+                var tab = new Element('li', {'class': 'tab', 'text': index + 1, 'title': header.get('text')});
                 tab.addEvent('click', function() {
                     self.show(index);
                 });
