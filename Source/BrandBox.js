@@ -3,11 +3,15 @@ var BrandBox = new Class({
     Implements: [Events, Options],
 
     options: {
-        items:    '.item',
-        headers:  'h2',
-        tabs:     false,
-        list:     false,
-        interval: 5000
+        items:           '.item',
+        headers:         'h2',
+        tabs:            false,
+        tabItemClass:    'tab',
+        tabActiveClass:  'active',
+        list:            false,
+        listItemClass:   'litem',
+        listActiveClass: 'active',
+        interval:        5000
     },
 
     container: null,
@@ -28,7 +32,7 @@ var BrandBox = new Class({
         if (this.options.tabs) {
             this.tabs = new Elements();
             headers.each(function(header, index) {
-                var tab = new Element('li', {'class': 'tab', 'text': index + 1, 'title': header.get('text')});
+                var tab = new Element('li', {'class': self.options.tabItemClass, 'text': index + 1, 'title': header.get('text')});
                 tab.addEvent('click', function() {
                     self.show(index);
                 });
@@ -43,7 +47,7 @@ var BrandBox = new Class({
         if (this.options.list) {
             this.list = new Elements();
             headers.each(function(header, index) {
-                var item = new Element('li', {'class': 'item'}).adopt(header.clone());
+                var item = new Element('li', {'class': self.options.listItemClass}).adopt(header.clone());
                 item.addEvent('click', function() {
                     self.show(index);
                 });
@@ -99,13 +103,13 @@ var BrandBox = new Class({
             }
             
             if (this.options.tabs) {
-                this.tabs[this.current].removeClass('active');
-                this.tabs[index].addClass('active');
+                this.tabs[this.current].removeClass(this.options.tabActiveClass);
+                this.tabs[index].addClass(this.options.listActiveClass);
             }
 
             if (this.options.list) {
-                this.list[this.current].removeClass('active');
-                this.list[index].addClass('active');
+                this.list[this.current].removeClass(this.options.tabActiveClass);
+                this.list[index].addClass(this.options.listActiveClass);
             }
 
             this.current = index;
