@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-    <title>MooTools Brand Box Plugin</title>
+    <title>MooTools Brand Box Component</title>
     <script src="../Source/mootools-1.2.4-core.js" type="text/javascript"></script>
     <script src="../Source/BrandBox.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -13,29 +13,103 @@
             new BrandBox('container', {tabs: 'tabs', list: 'list'});
         });
     </script>
+    <style type="text/css">
+        #container {
+            width: 400px;
+            color: #333;
+            border-top: 1px #333 solid;
+        }
+        #tabs {
+            margin: 0;
+            padding: .4em;
+            text-align: right;
+            border-width: 0 1px 0 1px;
+            border-color: #333;
+            border-style: solid;
+        }
+        #tabs li {
+            display: inline;
+            margin-right: .2em;
+            padding: .2em .5em;
+            color: #ccc;
+            background-color: #666;
+            border-radius: 1em;
+            -moz-border-radius: 1em;
+            -webkit-border-radius: 1em;
+            -o-border-radius: 1em;
+            cursor: pointer;
+        }
+        #tabs .active {
+            background-color: #933;
+        }
+        #items {
+            position: relative;
+            height: 200px;
+            border: 1px #000 solid;
+        }
+        #items .item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 400px;
+        }
+        #items .item > * {
+            margin: 1em;
+        }
+        #list {
+            margin: 0;
+            padding: 0;
+        }
+        #list li {
+            margin: .2em 0 0 0;
+            padding: .2em;
+            list-style: none;
+            color: #333;
+            background-color: #999;
+            border: 1px #333 solid;
+            border-radius: .4em;
+            -moz-border-radius: .4em;
+            -webkit-border-radius: .4em;
+            -o-border-radius: .4em;
+            cursor: pointer;
+        }
+        #list li.active {
+            background-color: #933;
+        }
+        #list li * {
+            margin: 0;
+            padding: 0;
+            font: inherit;
+        }
+    </style>
 </head>
 
 <body>
 
+<h1>MooTools Brand Box Component</h1>
+
 <div id="container">
     <ul id="tabs"></ul>
-    <div class="item">
-        <h2>Sample item</h2>
-        <p>
-            Yada yada
-        </p>
-    </div>
-    <div class="item">
-        <h2>Sample item</h2>
-        <p>
-            Yada yada
-        </p>
-    </div>
-    <div class="item">
-        <h2>Sample item</h2>
-        <p>
-            Yada yada
-        </p>
+    <div id="items">
+        <div class="item">
+            <h2>MooTools at a discount!</h2>
+            <p>
+                Visit <a href="http://mootools.net/">MooTools.net</a> now for your free copy!
+            </p>
+        </div>
+        <div class="item">
+            <h2>This brand is somewhat different</h2>
+            <p>
+                This sample text has nothing to do with the actual plugin, ignore it for your own sake!
+            </p>
+        </div>
+        <div class="item">
+            <h2>Free beer, now 20% cheaper!</h2>
+            <p>
+                Free beer has always been free, but now it comes at 80% of the original price! <br />
+                MooTools is also free as in free beer: free to download, use and change to you liking. 
+            </p>
+        </div>
     </div>
     <ul id="list"></ul>
 </div>
