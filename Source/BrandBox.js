@@ -34,7 +34,7 @@ var BrandBox = new Class({
             headers.each(function(header, index) {
                 var tab = new Element('li', {'class': self.options.tabItemClass, 'text': index + 1, 'title': header.get('text')});
                 tab.addEvent('click', function() {
-                    self.show(index);
+                    self.show(index, true, false);
                 });
                 self.tabs.push(tab);
             });
@@ -49,7 +49,7 @@ var BrandBox = new Class({
             headers.each(function(header, index) {
                 var item = new Element('li', {'class': self.options.listItemClass}).adopt(header.clone());
                 item.addEvent('click', function() {
-                    self.show(index);
+                    self.show(index, true, false);
                 });
                 self.list.push(item);
             });
@@ -66,27 +66,36 @@ var BrandBox = new Class({
             });
             this.show(this.current, false);
 
-            this.timer = this.next.bind(this).periodical(this.options.interval);
+            this.start();
         }
 
         this.container.store('brandbox', this);
     },
 
+    startLoop: function() {
+        return this.next.periodical(this.options.interval, this, [true, false]);
+    },
+
     start: function() {
-        this.timer = this.next.bind(this).periodical(this.options.interval);
+        this.timer = this.startLoop();
         this.fireEvent('start', this.current);
     },
 
     stop: function() {
-        $clear(this.timer);
+        clearInterval(this.timer);
         this.fireEvent('stop', this.current);
     },
 
-    next: function() {
-        this.show((this.current + 1) % this.items.length);
+    previous: function(animate, userInitiated) {
+        var length = this.items.length;
+        this.show(((this.current - 1) + length) % length, animate, (userInitiated == undefined ? true : userInitiated));
     },
 
-    show: function(index, animate) {
+    next: function(animate, userInitiated) {
+        this.show((this.current + 1) % this.items.length, animate, (userInitiated == undefined ? true : userInitiated));
+    },
+
+    show: function(index, animate, userInitiated) {
         if (index >= 0 && index < this.items.length) {
             if (animate == undefined || animate) {
                 this.items[this.current].fade('out');
@@ -110,6 +119,11 @@ var BrandBox = new Class({
             if (this.options.list) {
                 this.list[this.current].removeClass(this.options.tabActiveClass);
                 this.list[index].addClass(this.options.listActiveClass);
+            }
+
+            if (userInitiated != undefined && userInitiated) {
+                clearTimeout(this.timer);
+                this.timer = this.next.periodical(this.options.interval, this, [true, false]);
             }
 
             this.current = index;
