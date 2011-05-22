@@ -1,3 +1,20 @@
+/*
+---
+description: BrandBox class
+
+license: MIT-style
+
+authors: akaIDIOT
+
+version: 0.1
+
+requires:
+	core/1.3: '*'
+
+provides: BrandBox
+...
+*/
+
 var BrandBox = new Class({
     
     Implements: [Events, Options],
