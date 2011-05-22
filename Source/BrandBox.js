@@ -34,7 +34,7 @@ var BrandBox = new Class({
             headers.each(function(header, index) {
                 var tab = new Element('li', {'class': self.options.tabItemClass, 'text': index + 1, 'title': header.get('text')});
                 tab.addEvent('click', function() {
-                    self.show(index, true, false);
+                    self.show(index, true, true);
                 });
                 self.tabs.push(tab);
             });
@@ -49,7 +49,7 @@ var BrandBox = new Class({
             headers.each(function(header, index) {
                 var item = new Element('li', {'class': self.options.listItemClass}).adopt(header.clone());
                 item.addEvent('click', function() {
-                    self.show(index, true, false);
+                    self.show(index, true, true);
                 });
                 self.list.push(item);
             });
