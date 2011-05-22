@@ -1,5 +1,7 @@
 Brand Box
 =========
+![Screenshot](http://akaidiot.github.com/MooTools-BrandBox/brandbox.png)
+
 BrandBox is a simple widget that enables the use of existing DOM elements to create widget that cycles through pieces of content. Whether these pieces of content are images, pieces of text or flash videos is left to the user. 
 
 Optionally, the class can create numbered 'tabs' and/or a list indicating the names of the items that are cycled. Both the tabs and the list will hilight along with the content that is currently being showed by applying a user-defined class to the corresponding items. 
