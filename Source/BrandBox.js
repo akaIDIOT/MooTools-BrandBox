@@ -8,8 +8,8 @@ authors: akaIDIOT
 
 version: 0.1
 
-requires:
-	core/1.3: '*'
+requires: 
+core/1.3: '*'
 
 provides: BrandBox
 ...
