@@ -8,6 +8,8 @@ Optionally, the class can create numbered 'tabs' and/or a list indicating the na
 
 The styling of the entire plugin (including the positioning of the container and contents) is left to the user. See the demo for an example of this. 
 
+The code (`BrandBox.js`) will work with both MooTools 1.3 and 1.4, without needing compatibility layer. 
+
 How To Use
 ----------
 
@@ -133,8 +135,11 @@ Shows a particular item by index.
 Changelog
 ---------
 
+### 0.2
+
+- update to MooTools 1.4. (functional code unchanged)
+
 ### 0.1
 
 - initial release 
-
 

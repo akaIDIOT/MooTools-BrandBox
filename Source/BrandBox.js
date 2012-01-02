@@ -6,10 +6,10 @@ license: MIT-style
 
 authors: akaIDIOT
 
-version: 0.1
+version: 0.2
 
 requires: 
-core/1.3: '*'
+core/1.4: '*'
 
 provides: BrandBox
 ...
